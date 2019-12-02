@@ -1,0 +1,6 @@
+start_time: '0 10 17 * * ? '
+stop_time: '0 15 17 * * ? '
+region_id: 25
+plan_id: 201
+os_id: 167
+server_name: vultr001
