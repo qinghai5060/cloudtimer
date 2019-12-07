@@ -10,13 +10,14 @@ fi
 set_env_arm() {
 export GOOS=linux
 export GOARCH=arm
-export GOARM=7
+# TODO: we should try to turn on vfp.see https://github.com/golang/go/issues/18483,
+export GOARM=5
 }
 
 set_env_arm
 
 #GOARCH=arm GOARM=7 GOOS=linux go build -ldflags="-s -w" -o cloud_cron .
-GOARCH=arm GOARM=7 GOOS=linux go build -o cloud_cron .
+go build -o cloud_cron .
 
 mv cloud_cron "${BIN_DIR}"
 

@@ -6,7 +6,6 @@ import (
 	"os"
 	"os/signal"
 	"src/CloudCron/cmd"
-	"syscall"
 
 	"github.com/golang/glog"
 )
@@ -24,11 +23,12 @@ func main() {
 	glog.CopyStandardLogTo("INFO")
 	defer glog.Flush()
 
+	glog.Info("start to work...")
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	ch := make(chan os.Signal, 1)
-	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
+	signal.Notify(ch)
 	cc := cmd.NewCloudCron(ctx, os.Getenv(VultrKey))
 	if err := cc.Run(ctx, confFile); err != nil {
 		panic(err)
